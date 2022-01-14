@@ -14,6 +14,7 @@ from linebot.models import (
 
 load_dotenv()
 
+name = "Ralf好棒棒"
 app = Flask(name)
 
 line_token = os.getenv("LINE_TOKEN")
