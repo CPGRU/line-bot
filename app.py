@@ -15,7 +15,7 @@ from linebot.models import (
 load_dotenv()
 
 name = "Ralf好棒棒"
-app = Flask(name)
+lineapp = Flask(name)
 
 line_token = os.getenv("LINE_TOKEN")
 line_channel_secret = os.getenv("LINE_CHANNEL_SECRET")
@@ -23,14 +23,14 @@ line_bot_api = LineBotApi(line_token)
 handler = WebhookHandler(line_channel_secret)
 
 
-@app.route("/callback", methods=['POST'])
+@lineapp.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
     # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+    lineapp.logger.info("Request body: " + body)
 
     # handle webhook body
     try:
@@ -50,4 +50,4 @@ def handle_message(event):
 
 
 if name == "main":
-    app.run()
+    lineapp.run()
