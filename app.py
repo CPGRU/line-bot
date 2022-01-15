@@ -53,8 +53,7 @@ def handle_message(event):
         r = '你好'
     elif msg == '你是誰':
         r = '我是機器人'
-    elif '天氣' in msg:
-        r = swisstime.report()
+    
 
     line_bot_api.reply_message(
         event.reply_token,
