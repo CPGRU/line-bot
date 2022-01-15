@@ -2,3 +2,4 @@ line-bot-sdk
 gunicorn
 flask
 python-dotenv
+python-dateutil
