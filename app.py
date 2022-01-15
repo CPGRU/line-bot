@@ -49,11 +49,11 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    r = "想查詢瑞士資訊嗎? 請輸入:天氣, 時間, 旅遊 及 相關文章"
-    if msg in ['hi', 'Hi', '你好'] :
+    r = "我不懂你在說什麼? 我的中文不好..."
+    if msg in ['hi', 'Hi', '你好', '妳好'] :
         r = '你好'
-    elif msg == '你是誰':
-        r = '我是機器人'
+    elif msg in ['你是誰', '你是誰?', '妳是誰', '妳是誰?', 'who are you']:
+        r = '我是Ralf'
     elif '時間' in msg:
         now = datetime.now(gettz('Switzerland'))
         r = now.isoformate()
