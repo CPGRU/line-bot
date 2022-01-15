@@ -1,5 +1,6 @@
-import swisstime
-swisstime.start()
+
+from dateutil.tz import gettz
+from datetime import datetime
 
 from flask import Flask, request, abort
 from dotenv import load_dotenv
@@ -53,7 +54,9 @@ def handle_message(event):
         r = '你好'
     elif msg == '你是誰':
         r = '我是機器人'
-    
+    elif '時間' in msg:
+        now = datetime.now(gettz('Switzerland'))
+        r = now.isoformate()
 
     line_bot_api.reply_message(
         event.reply_token,
