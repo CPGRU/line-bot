@@ -1,3 +1,6 @@
+import swisstime
+swisstime.start()
+
 from flask import Flask, request, abort
 from dotenv import load_dotenv
 import os
@@ -9,12 +12,12 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage
 )
 
 load_dotenv()
 
-name = "Ralf好棒棒"
+name = "Swiss_Life"
 lineapp = Flask(name)
 
 line_token = os.getenv("LINE_TOKEN")
@@ -44,9 +47,18 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    msg = event.message.text
+    r = "想查詢瑞士資訊嗎? 請輸入:天氣, 時間, 旅遊 及 相關文章"
+    if msg in ['hi', 'Hi', '你好'] :
+        r = '你好'
+    elif msg == '你是誰':
+        r = '我是機器人'
+    elif '天氣' in msg:
+        r = swisstime.report()
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=r))
 
 
 if name == "main":
